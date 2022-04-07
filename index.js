@@ -21,7 +21,7 @@ async function createConnection() {
 const client = await createConnection();
 
 app.get("/", (request, response) => {
-  response.send("hello");
+  response.send("Welcome to Movie app API!!");
 });
 
 app.post("/signup", async (request, response) => {
