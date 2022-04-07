@@ -3,18 +3,18 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv"
 
 
+
 dotenv.config()
-
-
 const app = express();
 app.use(express.json());
 
+const PORT = process.env.PORT;
 // const MONGO_URL = "mongodb://localhost";
 const MONGO_URL = process.env.MONGO_URL;
 async function createConnection() {
   const client = new MongoClient(MONGO_URL);
   await client.connect();
-  console.log("Mongo is connect 👍✨✨");
+  console.log("Mongo is connect!!");
   return client;
 }
 
@@ -122,4 +122,4 @@ app.put("/editmovie/:movieid", async function (request, response) {
     : response.status(404).send({ Message: "No user available" });
 });
 
-app.listen(5000, () => console.log("am at 5000"));
+app.listen(PORT, () => console.log(`Am at ${PORT}`));
