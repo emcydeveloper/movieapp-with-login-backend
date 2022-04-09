@@ -40,8 +40,16 @@ app.post("/signup", async (request, response) => {
   response.send(addUser);
 });
 
-app.get("/login", (request, response) => {
-  response.send("login");
+app.get("/login/:username", async (request, response) => {
+  const { username } = request.params;
+  const userInfo = await client
+    .db("movieappWithLogin")
+    .collection("userProfile")
+    .findOne({ username: username });
+  userInfo
+    ? response.send(userInfo)
+    : response.status(404).send({ Message: "Invalid username" });
+
 });
 
 app.get("/getusers", async function (request, response) {
