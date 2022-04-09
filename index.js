@@ -84,6 +84,19 @@ app.put("/edituser/:userid", async function (request, response) {
     : response.status(404).send({ Message: "No user available" });
 });
 
+app.delete("/deleteuser/:userid", async function (request, response) {
+  // const deleteData = request.body;
+  const { userid } = request.params;
+  console.log(userid);
+  const deleteInfo = await client
+    .db("movieappWithLogin")
+    .collection("userProfile")
+    .deleteOne({ id: parseInt(userid) });
+    deleteInfo
+    ? response.send(deleteInfo)
+    : response.status(404).send({ Message: "No user available" });
+});
+
 app.post("/addmovie", async (request, response) => {
   const movieCount = await client
     .db("movieappWithLogin")
@@ -130,5 +143,20 @@ app.put("/editmovie/:movieid", async function (request, response) {
     ? response.send(editInfo)
     : response.status(404).send({ Message: "No user available" });
 });
+
+
+app.delete("/deletemovie/:userid", async function (request, response) {
+  // const deleteData = request.body;
+  const { userid } = request.params;
+  console.log(userid);
+  const deleteInfo = await client
+    .db("movieappWithLogin")
+    .collection("movielist")
+    .deleteOne({ id: parseInt(userid) });
+    deleteInfo
+    ? response.send(deleteInfo)
+    : response.status(404).send({ Message: "No user available" });
+});
+
 
 app.listen(PORT, () => console.log(`Am at ${PORT}`));
