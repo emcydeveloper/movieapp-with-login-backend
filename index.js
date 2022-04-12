@@ -7,7 +7,7 @@ import { moviesRouter } from "./routes/movies.js";
 import { userRouter } from "./routes/users.js";
 
 dotenv.config();
-import { format } from "path";
+
 const app = express();
 
 app.use(express.json());
